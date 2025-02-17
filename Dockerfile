@@ -1,18 +1,18 @@
-# Use official Python image as base
-FROM python:3.10
+# Use the official Node.js image as the base
+FROM node:18-alpine
 
 # Set working directory inside container
 WORKDIR /app
 
-# Copy requirements file and install dependencies
-COPY backend/requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy package.json and install dependencies
+COPY backend/package.json backend/package-lock.json ./
+RUN npm install
 
-# Copy Django project files
-COPY backend/ /app/
+# Copy the backend code into the container
+COPY backend/ .
 
-# Expose the port Django runs on
-EXPOSE 8000
+# Expose the Fastify server port
+EXPOSE 3000
 
-# Run Django server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Start the Fastify server
+CMD ["node", "server.js"]

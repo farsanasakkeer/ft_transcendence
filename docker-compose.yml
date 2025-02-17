@@ -4,21 +4,19 @@ services:
   backend:
     build: .
     ports:
-      - "8000:8000"
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=sqlite:///app/db.sqlite
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgres://user:password@db:5432/mydatabase
 
   db:
-    image: postgres
+    image: nouchka/sqlite3
     restart: always
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydatabase
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - db_data:/root/db
 
 volumes:
-  pg_data:
+  db_data:

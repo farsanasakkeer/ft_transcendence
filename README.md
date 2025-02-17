@@ -19,3 +19,11 @@ Technical changes:
 • Remote auth module: 42-OAuth ⇒ Google Sign-in
 
 • Advanced 3D graphics: ThreeJS ⇒ BabylonJS
+
+Rebuild Docker containers:
+
+docker-compose up --build
+
+
+Check if the Django server is running at:
+👉 http://localhost:8000
