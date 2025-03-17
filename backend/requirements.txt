@@ -1,8 +1,0 @@
-Django==4.2
-djangorestframework==3.14.0
-psycopg2-binary==2.9.6  # PostgreSQL database adapter
-gunicorn==21.2.0        # Production WSGI server
-django-cors-headers==4.2.0  # For handling CORS issues
-django-environ==0.11.2  # For managing environment variables
-channels==4.0.0  # WebSockets support (for multiplayer)
-daphne==4.0.0    # ASGI server (needed for WebSockets)
