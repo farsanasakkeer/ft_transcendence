@@ -8,7 +8,21 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  password String
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  password  String
+  twoFA     Boolean @default(false)
+  secret    String? 
+
+  matches   Match[] // ← One-to-many relationship
+}
+
+model Match {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  playerScore Int
+  guestScore  Int
+  result      String   // "win" or "loss"
+  createdAt   DateTime @default(now())
 }

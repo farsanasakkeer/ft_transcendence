@@ -1,0 +1,72 @@
+{
+  "register": {
+    "title": "Crée ton profil de joueur !",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirme le mot de passe",
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "submit": "Rejoins la bataille",
+    "loginPrompt": "Déjà un guerrier ?",
+    "loginLink": "Entre dans l’arène"
+  },
+  "login": {
+    "title": "Connexion Joueur",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "submit": "Entre dans l’arène",
+    "registerPrompt": "Nouveau sur GameZone ?",
+    "registerLink": "Créer un compte"
+  },
+  "landing": {
+    "title": "Bienvenue sur ft_transcendence",
+    "registerBtn": "S'inscrire maintenant",
+    "loginBtn": "Connexion",
+    "subtitle": "Prépare-toi pour des batailles palpitantes et des victoires inoubliables !"
+  },
+  "dashboard": {
+    "title": "Tableau de bord du joueur",
+    "logout": "Déconnexion",
+    "welcome": "Bienvenue, Joueur !",
+    "description": "Tes statistiques de jeu et activités récentes sont ci-dessous.",
+    "sidebar": {
+      "title": "Navigation",
+      "home": "Accueil",
+      "profile": "Profil",
+      "settings": "Paramètres"
+    },
+    "stats": {
+      "wins": "Victoires totales",
+      "active": "Matchs actifs",
+      "defeats": "Défaites"
+    },
+    "recent": {
+      "title": "Activité récente",
+      "activity1": "A vaincu PlayerX dans Battle Royale",
+      "activity2": "Atteint le niveau 50 en mode classé",
+      "activity3": "A rejoint un nouveau clan : Guerriers d’élite"
+    },
+    "profile": {
+      "title": "Profil",
+      "profile": "Voir le profil"
+    }
+  },
+  "profile": {
+    "title": "Ton profil",
+    "security": {
+      "heading": "Authentification à deux facteurs (2FA)",
+      "description": "Active ou désactive la 2FA pour ton compte. Tu seras invité à scanner un code QR et à entrer un code de vérification.",
+      "toggleLabel": "Activer la 2FA"
+    }
+  },
+  "notFound": {
+    "title": "Vous êtes tombé sur un pixel mort !",
+    "description": "La page que vous cherchez n'existe pas dans cet univers. Peut-être un bug dans la matrice ?",
+    "goBack": "Retour à la Base",
+    "hint": "Essayez de naviguer depuis le menu principal ou retournez en lieu sûr.",
+    "quote": "Même les héros se perdent parfois — appuyez sur Start pour réessayer."
+  },
+  "toast": {
+    "loginSuccess": "Connexion réussie !",
+    "loginFail": "E-mail ou mot de passe invalide"
+  }
+}
