@@ -18,11 +18,13 @@ model User {
 }
 
 model Match {
-  id          Int      @id @default(autoincrement())
-  userId      Int
-  user        User     @relation(fields: [userId], references: [id])
-  playerScore Int
-  guestScore  Int
-  result      String   // "win" or "loss"
-  createdAt   DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  playerScore  Int
+  guestScore   Int
+  result       String   // 'win', 'loss', or 'draw'
+  game         String   @default("pong")  // 'pong' or 'xo'
+  createdAt    DateTime @default(now())
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       Int?
 }
+

@@ -3,20 +3,24 @@ import { submitMatch } from "../gameResult";
 export function startPongGame() {
   const canvas = document.getElementById("pongCanvas") as HTMLCanvasElement;
   const ctx = canvas.getContext("2d")!;
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
 
-  const paddleWidth = 12;
-  const paddleHeight = 100;
+  // Set a fixed logical size; CSS will handle responsive scaling
+  canvas.width = 480;
+  canvas.height = 270;
+
+  const paddleWidth = 6;
+  const paddleHeight = 48;
   let playerY = canvas.height / 2 - paddleHeight / 2;
   let guestY = canvas.height / 2 - paddleHeight / 2;
+  let isPaused = false;
+
 
   const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    size: 12,
-    dx: 4,
-    dy: 4,
+    size: 6,
+    dx: 3,
+    dy: 3,
   };
 
   let playerScore = 0;
@@ -47,11 +51,10 @@ export function startPongGame() {
   function update() {
     if (gameOver) return;
 
-    // Smooth paddle movement
-    if (keys.w && playerY > 0) playerY -= 6;
-    if (keys.s && playerY < canvas.height - paddleHeight) playerY += 6;
-    if (keys.ArrowUp && guestY > 0) guestY -= 6;
-    if (keys.ArrowDown && guestY < canvas.height - paddleHeight) guestY += 6;
+    if (keys.w && playerY > 0) playerY -= 5;
+    if (keys.s && playerY < canvas.height - paddleHeight) playerY += 5;
+    if (keys.ArrowUp && guestY > 0) guestY -= 5;
+    if (keys.ArrowDown && guestY < canvas.height - paddleHeight) guestY += 5;
 
     ball.x += ball.dx;
     ball.y += ball.dy;
@@ -88,7 +91,7 @@ export function startPongGame() {
 
     if (playerScore === winningScore || guestScore === winningScore) {
       gameOver = true;
-      submitMatch(playerScore, guestScore);
+      submitMatch(playerScore, guestScore, "pong");
       endGame();
     }
   }
@@ -104,7 +107,7 @@ export function startPongGame() {
     ball.x = canvas.width / 2;
     ball.y = canvas.height / 2;
     ball.dx = -ball.dx;
-    ball.dy = 4 * (Math.random() > 0.5 ? 1 : -1);
+    ball.dy = 3 * (Math.random() > 0.5 ? 1 : -1);
   }
 
   function updateScoreUI() {
@@ -118,7 +121,7 @@ export function startPongGame() {
     const overlay = document.getElementById("gameOverlay")!;
     const msg = document.getElementById("gameOverMessage")!;
     overlay.classList.remove("hidden");
-    msg.textContent = playerScore > guestScore ? "🏆 You Win!" : "👾 Guest Wins!";
+    msg.textContent = playerScore > guestScore ? "🏆 Victory! You Defeated the Guest!" : "👾 Game Over! Guest Won This Round!";
 
     document.getElementById("replayBtn")?.addEventListener("click", () => {
       playerScore = 0;
@@ -135,10 +138,13 @@ export function startPongGame() {
   }
 
   function loop() {
-    update();
-    draw();
+    if (!isPaused && !gameOver) {
+      update();
+      draw();
+    }
     requestAnimationFrame(loop);
   }
+  
 
   document.addEventListener("keydown", (e) => {
     if (e.key in keys) keys[e.key as keyof typeof keys] = true;
@@ -147,6 +153,13 @@ export function startPongGame() {
   document.addEventListener("keyup", (e) => {
     if (e.key in keys) keys[e.key as keyof typeof keys] = false;
   });
+
+  document.getElementById("pauseBtn")?.addEventListener("click", () => {
+    isPaused = !isPaused;
+    const btn = document.getElementById("pauseBtn")!;
+    btn.textContent = isPaused ? "▶️ Resume" : "⏸️ Pause";
+  });
+  
 
   loop();
 }

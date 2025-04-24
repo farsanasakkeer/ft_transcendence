@@ -56,16 +56,28 @@ const routes: Record<string, RouteEntry> = {
   },
   "/pong": {
     template: () => `
-      <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white p-4">
-        <div class="w-full max-w-5xl aspect-video bg-[#0f172a] rounded-xl border-4 border-blue-700 shadow-2xl relative overflow-hidden">
-          <div class="absolute top-4 left-4 text-lg font-bold text-blue-300">👤 Player</div>
-          <div class="absolute top-4 right-4 text-lg font-bold text-red-400">🧑 Guest</div>
-          <div class="absolute top-4 left-1/2 transform -translate-x-1/2 text-xl font-extrabold text-white tracking-wider" id="scoreBoard">
-            <span id="scorePlayer">0</span> : <span id="scoreGuest">0</span>
-          </div>
+      <div class="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center justify-center p-4 space-y-4">
+        <!-- Scoreboard -->
+        <div class="flex justify-between items-center w-full max-w-xl px-4">
+          <div class="text-blue-300 font-bold text-lg sm:text-xl">👤 Player: <span id="scorePlayer">0</span></div>
+          <div class="text-white font-extrabold text-lg sm:text-xl">VS</div>
+          <div class="text-red-400 font-bold text-lg sm:text-xl">🧑 Guest: <span id="scoreGuest">0</span></div>
+        </div>
+
+        <!-- Pause/Resume Button -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-40">
+          <button id="pauseBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded transition">
+            ⏸️ Pause
+          </button>
+        </div>
+
+        <!-- Game Box -->
+        <div class="w-full max-w-2xl bg-[#0f172a] rounded-xl border-4 border-blue-700 shadow-2xl relative aspect-video">
           <canvas id="pongCanvas" class="absolute inset-0 w-full h-full"></canvas>
+
+          <!-- Overlay -->
           <div id="gameOverlay" class="absolute inset-0 hidden flex flex-col items-center justify-center bg-black/70 text-white text-center z-50">
-            <h1 id="gameOverMessage" class="text-4xl font-extrabold text-yellow-400 mb-4 animate-pulse"></h1>
+            <h1 id="gameOverMessage" class="text-3xl font-extrabold text-yellow-400 mb-4 animate-pulse"></h1>
             <div class="space-x-4">
               <button id="replayBtn" class="px-4 py-2 bg-green-500 rounded hover:bg-green-600 transition font-semibold">Play Again</button>
               <button id="dashboardBtn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 transition font-semibold">Go to Dashboard</button>
@@ -76,6 +88,56 @@ const routes: Record<string, RouteEntry> = {
     `,
     scripts: () => import("./pong/pongGame").then((m) => m.startPongGame()),
   },
+  "/xo": {
+    template: () => `
+      <div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white p-4">
+        <h1 class="text-3xl font-extrabold text-blue-400 mb-6">❌ Tic-Tac-Toe (X/O)</h1>
+        <div class="grid grid-cols-3 gap-2 w-72 aspect-square bg-gray-800 rounded-lg p-4" id="xo-board">
+          ${Array(9).fill(0).map((_, i) => `<div class="xo-cell w-full h-full flex items-center justify-center text-4xl font-bold bg-gray-900 hover:bg-gray-700 transition rounded cursor-pointer" data-index="${i}"></div>`).join("")}
+        </div>
+        <p id="xo-status" class="text-lg mt-6 text-yellow-300 font-semibold"></p>
+        <div class="mt-4 space-x-4">
+          <button id="xo-restart" class="px-4 py-2 bg-green-500 rounded hover:bg-green-600">Play Again</button>
+          <button onclick="window.route('/dashboard')" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700">Go to Dashboard</button>
+        </div>
+      </div>
+    `,
+    scripts: () => import("./xo/xoGame").then(m => m.startXOGame()),
+  },
+  "/pong-ai": {
+  template: () => `
+    <div class="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center justify-center p-4 space-y-4">
+      <!-- Scoreboard -->
+      <div class="flex justify-between items-center w-full max-w-xl px-4">
+        <div class="text-blue-300 font-bold text-lg sm:text-xl">👤 Player: <span id="scorePlayer">0</span></div>
+        <div class="text-white font-extrabold text-lg sm:text-xl">VS</div>
+        <div class="text-red-400 font-bold text-lg sm:text-xl">🤖 AI: <span id="scoreGuest">0</span></div>
+      </div>
+
+      <!-- Pause/Resume Button -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-40">
+        <button id="pauseBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-4 py-2 rounded transition">
+          ⏸️ Pause
+        </button>
+      </div>
+
+      <!-- Game Box -->
+      <div class="w-full max-w-2xl bg-[#0f172a] rounded-xl border-4 border-pink-600 shadow-2xl relative aspect-video">
+        <canvas id="pongCanvas" class="absolute inset-0 w-full h-full"></canvas>
+
+        <!-- Overlay -->
+        <div id="gameOverlay" class="absolute inset-0 hidden flex flex-col items-center justify-center bg-black/70 text-white text-center z-50">
+          <h1 id="gameOverMessage" class="text-3xl font-extrabold text-yellow-400 mb-4 animate-pulse"></h1>
+          <div class="space-x-4">
+            <button id="replayBtn" class="px-4 py-2 bg-green-500 rounded hover:bg-green-600 transition font-semibold">Play Again</button>
+            <button id="dashboardBtn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 transition font-semibold">Go to Dashboard</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  scripts: () => import("./pong/pongAI").then((m) => m.startPongAI()),
+},
   "/404": { template: notFoundPage },
 };
 
