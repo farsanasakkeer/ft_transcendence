@@ -3,19 +3,19 @@ default: up-detach
 
 # Build and start the project with Docker Compose in detached mode
 up-detach:
-	docker-compose up --build -d
+	docker compose up --build -d
 
 # Build and start the project with Docker Compose in foreground mode (shows logs)
 up:
-	docker-compose up --build
+	docker compose up --build
 
 # Stop running containers
 stop:
-	docker-compose down
+	docker compose down
 
 # Remove containers and associated volumes (Resets the database)
 clean:
-	docker-compose down -v
+	docker compose down -v
 
 # Remove all images, containers, volumes, and networks (Full Cleanup)
 fclean:

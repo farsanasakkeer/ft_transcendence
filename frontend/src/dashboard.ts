@@ -6,7 +6,8 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const token = localStorage.getItem("token");
 if (!token) {
     alert("Unauthorized! Please login.");
-    window.location.href = "login.html";
+    // window.location.href = "login.html";
+    navigateTo("/login");
 }
 
 // Fetch Protected Data
@@ -17,11 +18,13 @@ axios.get(`${API_URL}/protected`, {
     .catch(() => {
         alert("Session expired. Please log in again.");
         localStorage.removeItem("token");
-        window.location.href = "login.html";
+        // window.location.href = "login.html";
+        navigateTo("/login");
     });
 
 // Logout
 document.getElementById("logoutBtn")?.addEventListener("click", () => {
     localStorage.removeItem("token");
-    window.location.href = "login.html";
+    // window.location.href = "login.html";
+    navigateTo("/login");
 });

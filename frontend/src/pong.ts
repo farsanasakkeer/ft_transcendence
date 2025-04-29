@@ -1,7 +1,10 @@
-const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement | null;
-if (!canvas) {
-  console.error('Canvas not found!');
-} else {
+export function initGame(): void {
+  const canvas = document.getElementById('gameCanvas') as HTMLCanvasElement | null;
+  if (!canvas) {
+    console.error('Canvas not found!');
+    return;
+  }
+
   const ctx = canvas.getContext('2d');
   if (!ctx) {
     console.error("Canvas context could not be found");
