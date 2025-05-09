@@ -1,0 +1,73 @@
+{
+    "register": {
+      "title": "¡Crea tu perfil de jugador!",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "passwordMismatch": "Las contraseñas no coinciden",
+      "submit": "Únete a la batalla",
+      "loginPrompt": "¿Ya eres un guerrero?",
+      "loginLink": "Entra en la Arena"
+    },
+    "login": {
+      "title": "Inicio de sesión del jugador",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Entra en la Arena",
+      "registerPrompt": "¿Nuevo en GameZone?",
+      "registerLink": "Crear una cuenta"
+    },
+    "landing": {
+      "title": "Bienvenido a ft_transcendence",
+      "registerBtn": "Regístrate ahora",
+      "loginBtn": "Iniciar sesión",
+      "subtitle": "¡Prepárate para batallas emocionantes y victorias inolvidables!"
+    },
+    "dashboard": {
+      "title": "Panel del Jugador",
+      "logout": "Cerrar sesión",
+      "welcome": "¡Bienvenido, Jugador!",
+      "description": "Tus estadísticas de juego y actividades recientes están abajo.",
+      "sidebar": {
+        "title": "Navegación",
+        "home": "Inicio",
+        "profile": "Perfil",
+        "settings": "Configuración"
+      },
+      "stats": {
+        "wins": "Victorias totales",
+        "active": "Partidas activas",
+        "defeats": "Derrotas"
+      },
+      "recent": {
+        "title": "Actividad reciente",
+        "activity1": "Derrotó a PlayerX en Battle Royale",
+        "activity2": "Alcanzó el nivel 50 en modo clasificado",
+        "activity3": "Se unió a un nuevo clan: Guerreros de élite"
+      },
+      "profile": {
+        "title": "Perfil",
+        "profile": "Ver perfil"
+      }
+    },
+    "profile": {
+      "title": "Tu perfil",
+      "security": {
+        "heading": "Autenticación de dos factores (2FA)",
+        "description": "Habilita o deshabilita 2FA para tu cuenta. Se te pedirá que escanees un código QR y ingreses un código de verificación.",
+        "toggleLabel": "Habilitar 2FA"
+      }
+    },
+    "notFound": {
+      "title": "¡Has encontrado un píxel muerto!",
+      "description": "La página que intentas alcanzar no existe en este universo. ¿Tal vez fue un fallo en la matriz?",
+      "goBack": "Regresar a la Base",
+      "hint": "Intenta navegar desde el menú principal o regresa a un lugar seguro.",
+      "quote": "Incluso los héroes pierden el rumbo a veces — presiona Start para intentarlo de nuevo."
+    },
+    "toast": {
+      "loginSuccess": "¡Inicio de sesión exitoso!",
+      "loginFail": "Correo o contraseña inválidos"
+    }
+  }
+  

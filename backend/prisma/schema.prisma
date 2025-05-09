@@ -8,7 +8,60 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  password String
+  id        Int     @id @default(autoincrement())
+  email     String  @unique
+  password  String
+  twoFA     Boolean @default(false)
+  secret    String? 
+
+  matches   Match[] // ← One-to-many relationship
+
+  tournamentPlayers TournamentPlayer[]
+  tournamentMatches1 TournamentMatch[] @relation("TournamentPlayer1")
+  tournamentMatches2 TournamentMatch[] @relation("TournamentPlayer2")
+  tournamentMatchesWon TournamentMatch[] @relation("TournamentWinner")
 }
+
+model Match {
+  id           Int      @id @default(autoincrement())
+  playerScore  Int
+  guestScore   Int
+  result       String   // 'win', 'loss', or 'draw'
+  game         String   @default("pong")  // 'pong' or 'xo'
+  createdAt    DateTime @default(now())
+  user         User?    @relation(fields: [userId], references: [id])
+  userId       Int?
+}
+
+model Tournament {
+  id        Int                 @id @default(autoincrement())
+  name      String
+  status    String              @default("pending") // pending, ongoing, finished
+  createdAt DateTime            @default(now())
+  players   TournamentPlayer[]
+  matches   TournamentMatch[]
+}
+
+model TournamentPlayer {
+  id           Int         @id @default(autoincrement())
+  tournament   Tournament  @relation(fields: [tournamentId], references: [id])
+  tournamentId Int
+  user         User        @relation(fields: [userId], references: [id])
+  userId       Int
+
+  @@unique([tournamentId, userId]) // Prevent duplicate entries
+}
+
+model TournamentMatch {
+  id           Int         @id @default(autoincrement())
+  tournament   Tournament  @relation(fields: [tournamentId], references: [id])
+  tournamentId Int
+  round        Int
+  player1      User        @relation("TournamentPlayer1", fields: [player1Id], references: [id])
+  player1Id    Int
+  player2      User        @relation("TournamentPlayer2", fields: [player2Id], references: [id])
+  player2Id    Int
+  winner       User?       @relation("TournamentWinner", fields: [winnerId], references: [id])
+  winnerId     Int?
+}
+

@@ -1,7 +1,6 @@
-import { renderPage } from "./router";
-
-window.addEventListener("popstate", renderPage);
+import { setupSPA, handleRouteChange } from "./route";
 
 document.addEventListener("DOMContentLoaded", () => {
-    renderPage();
+  setupSPA();
+  handleRouteChange();
 });
