@@ -1,0 +1,73 @@
+{
+    "register": {
+      "title": "Build Your Player Profile!",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "passwordMismatch": "Passwords do not match",
+      "submit": "Join the Battle",
+      "loginPrompt": "Already a warrior?",
+      "loginLink": "Enter the Arena"
+    },
+    "login": {
+      "title": "Player Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Enter the Arena",
+      "registerPrompt": "New to GameZone?",
+      "registerLink": "Create an Account"
+    },
+    "landing": {
+        "title": "Welcome to ft_transcendence",
+        "registerBtn": "Register Now",
+        "loginBtn": "Login",
+        "subtitle": "Prepare for thrilling battles and unforgettable victories!"
+    },
+    "dashboard": {
+      "title": "Gamer Dashboard",
+      "logout": "Logout",
+      "welcome": "Welcome, Player!",
+      "description": "Your gaming stats and recent activities are below.",
+      "sidebar": {
+        "title": "Navigation",
+        "home": "Home",
+        "profile": "Profile",
+        "settings": "Settings"
+      },
+      "stats": {
+        "wins": "Total Wins",
+        "active": "Active Matches",
+        "defeats": "Defeats"
+      },
+      "recent": {
+        "title": "Recent Activity",
+        "activity1": "Defeated PlayerX in Battle Royale",
+        "activity2": "Reached Level 50 in Ranked Mode",
+        "activity3": "Joined a new Clan: Elite Warriors"
+      },
+      "profile": {
+        "title": "Profile",
+        "profile": "View Profile"
+      }
+    },
+    "profile": {
+      "title": "Your Profile",
+      "security": {
+        "heading": "Two-Factor Authentication (2FA)",
+        "description": "Enable or disable 2FA for your account. You will be prompted to scan a QR code and enter a verification code.",
+        "toggleLabel": "Enable 2FA"
+      }
+    },
+    "notFound": {
+      "title": "You've hit a dead pixel!",
+      "description": "The page you're trying to reach doesn't exist in this universe. Maybe it was a glitch in the matrix?",
+      "goBack": "Return to Base",
+      "hint": "Try navigating from the main menu or warp back to safety.",
+      "quote": "Even heroes lose their way sometimes — press Start to try again."
+    },
+    "toast": {
+      "loginSuccess": "Login successful!",
+      "loginFail": "Invalid email or password"
+    }
+  }
+  
