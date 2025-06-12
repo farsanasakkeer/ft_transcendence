@@ -10,6 +10,10 @@ import { profilePage } from "./pages/profile";
 import { notFoundPage } from "./pages/notFound";
 import { handleGoogleLoginSuccess } from "./googleSuccess";
 import { handleGoogle2FAChallenge } from "./google2fa";
+import { tournamentSetupPage } from "./pages/tournament";
+import { tournamentBracketPage } from "./pages/tournamentBracket";
+import { tournamentState } from "./tournamentState";
+// import { setupTournament } from "./tournament";
 
 type RouteEntry = {
   template: (translations: any) => string;
@@ -138,6 +142,77 @@ const routes: Record<string, RouteEntry> = {
   `,
   scripts: () => import("./pong/pongAI").then((m) => m.startPongAI()),
 },
+"/tournament": {
+  template: tournamentSetupPage,
+  scripts: () => import("./tournament").then(m => m.setupTournament()),
+},
+"/tournament/bracket": {
+  template: tournamentBracketPage,
+  scripts: () => import("./tournamentBracket").then(m => m.setupTournamentBracket()),
+},
+"/tournament/game": {
+  template: () => `
+    <div class="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4 space-y-4">
+      <h1 class="text-xl font-bold mb-2 text-yellow-400">🏓 Tournament Match</h1>
+
+      <!-- Scoreboard -->
+      <div class="flex justify-between items-center w-full max-w-xl px-4">
+        <div class="text-blue-300 font-bold text-lg sm:text-xl"><span id="playerName"></span>: <span id="scorePlayer">0</span></div>
+        <div class="text-white font-extrabold text-lg sm:text-xl">VS</div>
+        <div class="text-red-400 font-bold text-lg sm:text-xl"><span id="guestName"></span>: <span id="scoreGuest">0</span></div>
+      </div>
+
+      <div class="w-full max-w-2xl bg-[#0f172a] rounded-xl border-4 border-yellow-500 shadow-2xl relative aspect-video">
+        <canvas id="pongCanvas" class="absolute inset-0 w-full h-full"></canvas>
+
+        <!-- Overlay -->
+        <div id="gameOverlay" class="absolute inset-0 hidden flex flex-col items-center justify-center bg-black/70 text-white text-center z-50">
+          <h1 id="gameOverMessage" class="text-3xl font-extrabold text-yellow-400 mb-4 animate-pulse"></h1>
+          <div class="space-x-4">
+            <button id="dashboardBtn" class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 transition font-semibold">Back to Bracket</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `,
+  scripts: () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const p1 = urlParams.get("p1") || "Player 1";
+    const p2 = urlParams.get("p2") || "Player 2";
+
+    document.getElementById("playerName")!.textContent = p1;
+    document.getElementById("guestName")!.textContent = p2;
+
+    import("./pong/pongTournament").then((m) => {
+      m.startTournamentGame(p1, p2).then((winnerName) => {
+        const round = tournamentState.rounds[tournamentState.currentRoundIndex];
+        const match = round.matches.find(m => !m.winner && [m.player1.name, m.player2.name].includes(winnerName));
+        if (match) match.winner = { name: winnerName };
+
+        // Advance rounds if done
+        const allDone = round.matches.every(m => m.winner);
+        if (allDone) {
+          const next = round.matches.map(m => m.winner!);
+          if (next.length > 1) {
+            const nextRound = [];
+            for (let i = 0; i < next.length; i += 2) {
+              nextRound.push({ player1: next[i], player2: next[i + 1] });
+            }
+            tournamentState.rounds.push({ matches: nextRound });
+            tournamentState.currentRoundIndex++;
+          } else {
+            alert(`🏆 Final Winner: ${next[0].name}`);
+            window.route("/dashboard");
+            return;
+          }
+        }
+
+        window.route("/tournament/bracket");
+      });
+    });
+  }
+},
+
   "/404": { template: notFoundPage },
 };
 

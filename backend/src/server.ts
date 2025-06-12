@@ -11,7 +11,6 @@ import { googleAuthRoutes } from "./routes/google";
 import { matchRoutes } from "./routes/match";
 
 
-
 dotenv.config();
 
 const fastify = Fastify({ logger: true });
@@ -45,7 +44,6 @@ fastify.register(googleAuthRoutes);
 fastify.register(dashboardRoutes);
 fastify.register(twofaRoutes);
 fastify.register(matchRoutes);
-
 fastify.listen({ port: 3000, host: "0.0.0.0" }, () => {
   console.log("🚀 Server running on http://localhost:3000");
 });

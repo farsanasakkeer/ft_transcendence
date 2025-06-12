@@ -48,7 +48,40 @@
       "profile": {
         "title": "Perfil",
         "profile": "Ver perfil"
+      },
+      "games": {
+      "title": "🎮 Jogos",
+      "pong": {
+        "title": "🏓 Ping Pong",
+        "desc": "Jogue localmente com um amigo. O primeiro a 5 vence!",
+        "cta": "▶️ Jogar Agora"
+      },
+      "pongAi": {
+        "title": "🤖 Ping Pong IA",
+        "desc": "Jogue localmente contra a IA. O primeiro a 5 vence!",
+        "cta": "▶️ Jogar Agora"
+      },
+      "xo": {
+        "title": "❌ Tic-Tac-Toe",
+        "desc": "X contra O! Multijogador local — diversão clássica!",
+        "cta": "▶️ Jogar Agora"
+      },
+      "tournament": {
+        "title": "🏆 Modo Torneio",
+        "desc": "8 jogadores, 1 campeão! Eliminatória local.",
+        "cta": "Iniciar Torneio"
       }
+    },
+    "matchHistory": {
+      "title": "📜 Histórico de Partidas",
+      "filters": {
+        "all": "Todos",
+        "pong": "🏓 Ping Pong",
+        "pongAi": "🤖 Ping Pong IA",
+        "xo": "❌ X/O"
+      }
+    }
+
     },
     "profile": {
       "title": "Seu perfil",
